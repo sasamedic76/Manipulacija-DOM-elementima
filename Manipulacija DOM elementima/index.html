@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2 - Website Building</title>
+    <script src="https://kit.fontawesome.com/e6c493181a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        #login-container {
+            width: 460px;
+            margin: 0 auto;
+        }
+
+        form label,
+        form input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        form input {
+            padding: 6px;
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        form div {
+            margin: 16px 0px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="login-container">
+        <form>
+          <div>
+             <label for="username">Username:</label>
+             <input id="username" type="text">
+          </div>
+          <div>
+             <label for="password">Password:</label>
+             <input id="password" type="password">
+          </div>
+          <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <script>
+
+      var loginContainer = document.getElementById("login-container");
+      var newU = document.createElement("p");
+      var newP = document.createElement("p");
+      var newItemFirst = document.createElement("span");
+      var newItemSecond = document.createElement("span");
+      loginContainer.append(newU, newP);
+
+      loginContainer.addEventListener("submit", function (e) {
+
+      var username = document.getElementById("username").value;
+      document.getElementById("username").style.border = "solid red";
+
+      var password = document.getElementById("password").value;
+      document.getElementById("password").style.border = "solid red";
+
+
+       newItemFirst.setAttribute("id", "error");
+       document.getElementsByTagName("div")[1].append(newItemFirst);
+       document.getElementsByTagName("div")[1].style.cssText = "position:relative";
+       document.getElementById("error").style.cssText = "top:40px; right:10px";
+       newItemFirst.setAttribute("class", "fas fa-times fa-2x text-danger d-flex position-absolute");
+
+        newItemSecond.setAttribute("id", "errorS");
+        document.getElementsByTagName("div")[2].append(newItemSecond);
+        document.getElementsByTagName("div")[2].style.cssText = "position:relative";
+        document.getElementById("errorS").style.cssText = "top:40px; right:10px";
+        newItemSecond.setAttribute("class", "fas fa-times fa-2x text-danger block text-align-right position-absolute");
+        e.preventDefault();
+
+        if (username === "") {
+            newU.innerHTML = "* Please, enter username!";
+        } else {
+            if (username !== "new_user") {
+                newU.innerHTML = "* Please, enter valid username!";
+            } else {
+                document.getElementById("username").style.border = "solid green";
+                newItemFirst.classList.replace("text-danger","text-success");
+                newItemFirst.classList.replace("fa-times","fa-check");
+                newU.innerHTML = "";
+            }
+        }
+        if (password === "") {
+            newP.innerHTML = "* Please, enter password!";
+        } else {
+            if (password !== "1234567") {
+                newP.innerHTML = "* Please, enter valid password!";
+            } else {
+                document.getElementById("password").style.border = "solid green";
+                newItemSecond.classList.replace("text-danger","text-success");
+                newItemSecond.classList.replace("fa-times","fa-check");
+                newP.innerHTML = "";
+            }
+        }
+        if (username === "new_user" && password === "1234567") {
+            newP.innerHTML = "Successful login!";
+        }
+        });
+
+    </script>
+</body>
+</html>
